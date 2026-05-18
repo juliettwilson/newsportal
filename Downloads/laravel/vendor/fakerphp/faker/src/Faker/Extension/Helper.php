@@ -2,16 +2,9 @@
 
 namespace Faker\Extension;
 
-/**
- * A class with some methods that may make building extensions easier.
- *
- * @experimental This class is experimental and does not fall under our BC promise
- */
 final class Helper
 {
-    /**
-     * Returns a random element from a passed array.
-     */
+
     public static function randomElement(array $array)
     {
         if ($array === []) {
@@ -21,16 +14,10 @@ final class Helper
         return $array[array_rand($array, 1)];
     }
 
-    /**
-     * Replaces all hash sign ('#') occurrences with a random number
-     * Replaces all percentage sign ('%') occurrences with a non-zero number.
-     *
-     * @param string $string String that needs to bet parsed
-     */
+
     public static function numerify(string $string): string
     {
-        // instead of using randomDigit() several times, which is slow,
-        // count the number of hashes and generate once a large number
+
         $toReplace = [];
 
         if (($pos = strpos($string, '#')) !== false) {
@@ -62,11 +49,6 @@ final class Helper
         });
     }
 
-    /**
-     * Replaces all question mark ('?') occurrences with a random letter.
-     *
-     * @param string $string String that needs to bet parsed
-     */
     public static function lexify(string $string): string
     {
         return self::replaceWildcard($string, '?', static function () {
@@ -74,12 +56,6 @@ final class Helper
         });
     }
 
-    /**
-     * Replaces hash signs ('#') and question marks ('?') with random numbers and letters
-     * An asterisk ('*') is replaced with either a random number or a random letter.
-     *
-     * @param string $string String that needs to bet parsed
-     */
     public static function bothify(string $string): string
     {
         $string = self::replaceWildcard($string, '*', static function () {

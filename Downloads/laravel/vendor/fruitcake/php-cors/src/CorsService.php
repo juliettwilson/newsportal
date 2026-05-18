@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of fruitcake/php-cors and was originally part of asm89/stack-cors
- *
- * (c) Alexander <iam.asm89@gmail.com>
- * (c) Barryvdh <barryvdh@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace Fruitcake\Cors;
 
@@ -16,47 +7,20 @@ use Fruitcake\Cors\Exceptions\InvalidOptionException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @phpstan-type CorsInputOptions array{
- *  'allowedOrigins'?: string[],
- *  'allowedOriginsPatterns'?: string[],
- *  'supportsCredentials'?: bool,
- *  'allowedHeaders'?: string[],
- *  'allowedMethods'?: string[],
- *  'exposedHeaders'?: string[]|false,
- *  'maxAge'?: int|bool|null,
- *  'allowed_origins'?: string[],
- *  'allowed_origins_patterns'?: string[],
- *  'supports_credentials'?: bool,
- *  'allowed_headers'?: string[],
- *  'allowed_methods'?: string[],
- *  'exposed_headers'?: string[]|false,
- *  'max_age'?: int|bool|null
- * }
- *
- */
 class CorsService
 {
-    /** @var string[]  */
+
     private array $allowedOrigins = [];
-    /** @var string[] */
     private array $allowedOriginsPatterns = [];
-    /** @var string[] */
     private array $allowedMethods = [];
-    /** @var string[] */
     private array $allowedHeaders = [];
-    /** @var string[] */
     private array $exposedHeaders = [];
     private bool $supportsCredentials = false;
     private ?int $maxAge = 0;
-
     private bool $allowAllOrigins = false;
     private bool $allowAllMethods = false;
     private bool $allowAllHeaders = false;
 
-    /**
-     * @param CorsInputOptions $options
-     */
     public function __construct(array $options = [])
     {
         if ($options) {
@@ -64,9 +28,6 @@ class CorsService
         }
     }
 
-    /**
-     * @param CorsInputOptions $options
-     */
     public function setOptions(array $options): void
     {
         $this->allowedOrigins = $options['allowedOrigins'] ?? $options['allowed_origins'] ?? $this->allowedOrigins;
@@ -93,16 +54,14 @@ class CorsService
 
     private function normalizeOptions(): void
     {
-        // Normalize case
+
         $this->allowedHeaders = array_map('strtolower', $this->allowedHeaders);
         $this->allowedMethods = array_map('strtoupper', $this->allowedMethods);
 
-        // Normalize ['*'] to true
         $this->allowAllOrigins = in_array('*', $this->allowedOrigins);
         $this->allowAllHeaders = in_array('*', $this->allowedHeaders);
         $this->allowAllMethods = in_array('*', $this->allowedMethods);
 
-        // Transform wildcard pattern
         if (!$this->allowAllOrigins) {
             foreach ($this->allowedOrigins as $origin) {
                 if (strpos($origin, '*') !== false) {
@@ -112,20 +71,10 @@ class CorsService
         }
     }
 
-    /**
-     * Create a pattern for a wildcard, based on Str::is() from Laravel
-     *
-     * @see https://github.com/laravel/framework/blob/5.5/src/Illuminate/Support/Str.php
-     * @param string $pattern
-     * @return string
-     */
     private function convertWildcardToPattern($pattern)
     {
         $pattern = preg_quote($pattern, '#');
 
-        // Asterisks are translated into zero-or-more regular expression wildcards
-        // to make it convenient to check if the strings starts with the given
-        // pattern such as "*.example.com", making any string check convenient.
         $pattern = str_replace('\*', '.*', $pattern);
 
         return '#^' . $pattern . '\z#u';
@@ -204,13 +153,13 @@ class CorsService
     private function configureAllowedOrigin(Response $response, Request $request): void
     {
         if ($this->allowAllOrigins === true && !$this->supportsCredentials) {
-            // Safe+cacheable, allow everything
+
             $response->headers->set('Access-Control-Allow-Origin', '*');
         } elseif ($this->isSingleOriginAllowed()) {
-            // Single origins can be safely set
+
             $response->headers->set('Access-Control-Allow-Origin', array_values($this->allowedOrigins)[0]);
         } else {
-            // For dynamic headers, set the requested Origin header when set and allowed
+
             if ($this->isCorsRequest($request) && $this->isOriginAllowed($request)) {
                 $response->headers->set('Access-Control-Allow-Origin', (string) $request->headers->get('Origin'));
             }

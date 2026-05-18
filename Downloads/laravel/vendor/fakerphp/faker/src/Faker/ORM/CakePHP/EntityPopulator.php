@@ -16,17 +16,13 @@ class EntityPopulator
         $this->class = $class;
     }
 
-    /**
-     * @param string $name
-     */
+
     public function __get($name)
     {
         return $this->{$name};
     }
 
-    /**
-     * @param string $name
-     */
+
     public function __set($name, $value)
     {
         $this->{$name} = $value;
@@ -42,9 +38,7 @@ class EntityPopulator
         $this->modifiers = array_merge($this->modifiers, $modifiers);
     }
 
-    /**
-     * @return array
-     */
+
     public function guessColumnFormatters($populator)
     {
         $formatters = [];
@@ -80,9 +74,6 @@ class EntityPopulator
         return $formatters;
     }
 
-    /**
-     * @return array
-     */
     public function guessModifiers()
     {
         $modifiers = [];
@@ -119,14 +110,9 @@ class EntityPopulator
             };
         }
 
-        // TODO check if TreeBehavior attached to modify lft/rgt cols
-
         return $modifiers;
     }
 
-    /**
-     * @param array $options
-     */
     public function execute($class, $insertedEntities, $options = [])
     {
         $table = $this->getTable($class);

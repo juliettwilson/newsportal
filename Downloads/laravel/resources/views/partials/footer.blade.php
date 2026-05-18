@@ -1,5 +1,5 @@
 <footer class="bg-secondary text-white mt-16">
-    <!-- Top Footer -->
+
     <div class="bg-gray-900 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -33,10 +33,10 @@
         </div>
     </div>
 
-    <!-- Main Footer -->
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Logo & Description -->
+
             <div class="lg:col-span-1">
                 <p class="text-gray-400 mb-4">{{ __('site.description') }}</p>
                 <div class="flex items-center gap-2 text-sm text-gray-400">
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <!-- Categories -->
+
             <div>
                 <h3 class="font-semibold mb-4 text-white">{{ __('nav.categories') }}</h3>
                 <ul class="space-y-2">
@@ -62,7 +62,7 @@
                 </ul>
             </div>
 
-            <!-- Quick Links -->
+
             <div>
                 <h3 class="font-semibold mb-4 text-white">{{ __('footer.quick_links') }}</h3>
                 <ul class="space-y-2 text-gray-400">
@@ -84,7 +84,7 @@
                 </ul>
             </div>
 
-            <!-- Contact -->
+
             <div>
                 <h3 class="font-semibold mb-4 text-white">{{ __('footer.contact') }}</h3>
                 <ul class="space-y-3 text-gray-400">
@@ -118,7 +118,7 @@
         </div>
     </div>
 
-    <!-- Bottom Footer -->
+
     <div class="border-t border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">

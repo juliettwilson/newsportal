@@ -5,7 +5,7 @@
 @section('content')
     <section class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Header -->
+
             <div class="text-center mb-12">
                 <div class="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center"
                      style="background-color: {{ $category->color }}20">
@@ -18,7 +18,7 @@
                 <p class="text-gray-500 mt-2">{{ $news->total() }} {{ __('news.articles') }}</p>
             </div>
 
-            <!-- News Grid -->
+
             @if($news->count() > 0)
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                     @foreach($news as $item)

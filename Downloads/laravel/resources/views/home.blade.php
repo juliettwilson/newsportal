@@ -3,7 +3,7 @@
 @section('title', __('site.name') . ' - ' . __('site.tagline'))
 
 @section('content')
-    <!-- Breaking News Ticker -->
+
     <div class="bg-red-600 text-white py-2 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-4">
             <span class="flex-shrink-0 bg-white text-red-600 px-3 py-1 rounded text-sm font-bold animate-pulse">
@@ -25,16 +25,16 @@
         </div>
     </div>
 
-    <!-- Hero Section with Featured News -->
+
     @if(isset($featuredNews) && $featuredNews->count() > 0)
         <section class="bg-gradient-to-br from-primary via-blue-600 to-secondary py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Main Featured -->
+
                     @if($featuredNews->first())
                         @php $main = $featuredNews->first(); @endphp
                         <a href="{{ route('news.show', $main->slug) }}" class="relative rounded-2xl overflow-hidden h-96 group">
-                            <img src="{{ $main->image_url }}" alt="{{ $main->title }}" 
+                            <img src="{{ $main->image_url }}" alt="{{ $main->title }}"
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                             <div class="absolute bottom-0 left-0 right-0 p-6">
@@ -52,11 +52,11 @@
                         </a>
                     @endif
 
-                    <!-- Secondary Featured -->
+
                     <div class="grid grid-cols-2 gap-4">
                         @foreach($featuredNews->skip(1)->take(4) as $item)
                             <a href="{{ route('news.show', $item->slug) }}" class="relative rounded-xl overflow-hidden h-44 group">
-                                <img src="{{ $item->image_url }}" alt="{{ $item->title }}" 
+                                <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
                                      class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-3">
@@ -73,7 +73,7 @@
             </div>
         </section>
     @else
-        <!-- Static Hero when no featured news -->
+
         <section class="bg-gradient-to-br from-primary via-blue-600 to-secondary py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -143,7 +143,7 @@
         </section>
     @endif
 
-    <!-- Statistics Section -->
+
     <section class="py-8 bg-white border-b">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -167,7 +167,6 @@
         </div>
     </section>
 
-    <!-- Latest News -->
     <section id="latest" class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between mb-8">
@@ -189,7 +188,7 @@
                     @endforeach
                 </div>
             @else
-                <!-- Static Latest News Cards -->
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @for($i = 1; $i <= 6; $i++)
                         <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition group">
@@ -222,7 +221,7 @@
         </div>
     </section>
 
-    <!-- Categories Section -->
+
     <section id="categories" class="py-12 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10">
@@ -232,7 +231,7 @@
             @if(isset($categories) && $categories->count() > 0)
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     @foreach($categories as $category)
-                        <a href="{{ route('news.category', $category->slug) }}" 
+                        <a href="{{ route('news.category', $category->slug) }}"
                            class="relative rounded-xl overflow-hidden h-40 group"
                            style="background: linear-gradient(135deg, {{ $category->color }}, {{ $category->color }}dd)">
                             <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition"></div>
@@ -244,7 +243,7 @@
                     @endforeach
                 </div>
             @else
-                <!-- Static Categories -->
+
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     @php
                         $staticCategories = [
@@ -259,7 +258,7 @@
                         ];
                     @endphp
                     @foreach($staticCategories as $cat)
-                        <a href="{{ route('news.category', $cat['slug']) }}" 
+                        <a href="{{ route('news.category', $cat['slug']) }}"
                            class="relative rounded-xl overflow-hidden h-40 group"
                            style="background: linear-gradient(135deg, {{ $cat['color'] }}, {{ $cat['color'] }}dd)">
                             <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition"></div>
@@ -274,7 +273,6 @@
         </div>
     </section>
 
-    <!-- News by Category -->
     @foreach($categories as $category)
         @if(isset($categoryNews[$category->slug]) && $categoryNews[$category->slug]->count() > 0)
             <section class="py-12">
@@ -301,7 +299,7 @@
         @endif
     @endforeach
 
-    <!-- Popular News Section -->
+
     <section class="py-12 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-3 mb-8">
@@ -321,7 +319,7 @@
                     @endforeach
                 </div>
             @else
-                <!-- Static Popular News -->
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
                     @php
                         $staticPopular = [
@@ -346,7 +344,7 @@
         </div>
     </section>
 
-    <!-- Video News Section -->
+
     <section class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-3 mb-8">
@@ -382,7 +380,7 @@
         </div>
     </section>
 
-    <!-- Newsletter Section -->
+
     <section class="py-16 bg-gradient-to-br from-primary to-blue-700">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-bold text-white mb-4">{{ __('newsletter.title') }}</h2>
@@ -390,7 +388,7 @@
                 Ең соңғы жаңалықтарды бірінші болып біліңіз. Күнделікті жаңалықтар жіберіліп тұрады.
             </p>
             <form class="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
-                <input type="email" placeholder="Email мекенжайыңыз" 
+                <input type="email" placeholder="Email мекенжайыңыз"
                        class="flex-1 px-6 py-3 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none">
                 <button type="submit" class="bg-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-600 transition">
                     {{ __('newsletter.subscribe') }}
@@ -399,7 +397,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -407,8 +405,8 @@
                     <span class="text-primary font-semibold mb-2 block">{{ __('about.subtitle') }}</span>
                     <h2 class="text-3xl font-bold text-secondary mb-4">{{ __('about.title') }}</h2>
                     <p class="text-gray-600 mb-6 leading-relaxed">
-                        {{ __('site.name') }} - Қазақстанның жетекші жаңалықтар порталы. Біз 2010 жылдан бері 
-                        оқырмандарымызға сапалы және объективті ақпарат береміз. Біздің команда тәжірибелі 
+                        {{ __('site.name') }} - Қазақстанның жетекші жаңалықтар порталы. Біз 2010 жылдан бері
+                        оқырмандарымызға сапалы және объективті ақпарат береміз. Біздің команда тәжірибелі
                         журналистер мен редакторлардан құралған.
                     </p>
                     <ul class="space-y-3 mb-6">
@@ -460,7 +458,6 @@
         </div>
     </section>
 
-    <!-- Partners Section -->
     <section class="py-12 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-xl font-semibold text-gray-500 text-center mb-8">{{ __('partners.title') }}</h2>

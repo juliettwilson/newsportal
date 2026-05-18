@@ -16,17 +16,10 @@ use Doctrine\DBAL\Types\Exception\InvalidType;
 use Doctrine\DBAL\Types\Exception\ValueNotConvertible;
 use Exception;
 
-/**
- * @template T of CarbonInterface
- */
+
 trait CarbonTypeConverter
 {
-    /**
-     * This property differentiates types installed by carbonphp/carbon-doctrine-types
-     * from the ones embedded previously in nesbot/carbon source directly.
-     *
-     * @readonly
-     */
+
     public bool $external = true;
 
     /**
@@ -59,9 +52,7 @@ trait CarbonTypeConverter
         return trim("$before($precision) $after");
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
+
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if ($value === null) {

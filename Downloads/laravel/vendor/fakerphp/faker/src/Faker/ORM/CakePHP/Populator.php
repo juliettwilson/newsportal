@@ -30,9 +30,6 @@ class Populator
         return $this->guessers;
     }
 
-    /**
-     * @return $this
-     */
     public function removeGuesser($name)
     {
         if ($this->guessers[$name]) {
@@ -42,11 +39,6 @@ class Populator
         return $this;
     }
 
-    /**
-     * @throws \Exception
-     *
-     * @return $this
-     */
     public function addGuesser($class)
     {
         if (!is_object($class)) {
@@ -62,12 +54,6 @@ class Populator
         return $this;
     }
 
-    /**
-     * @param array $customColumnFormatters
-     * @param array $customModifiers
-     *
-     * @return $this
-     */
     public function addEntity($entity, $number, $customColumnFormatters = [], $customModifiers = [])
     {
         if (!$entity instanceof EntityPopulator) {
@@ -93,11 +79,6 @@ class Populator
         return $this;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return array
-     */
     public function execute($options = [])
     {
         $insertedEntities = [];

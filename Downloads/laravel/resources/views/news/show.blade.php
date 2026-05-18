@@ -6,7 +6,7 @@
 @section('content')
     <article class="py-8">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Breadcrumb -->
+
             <nav class="flex items-center gap-2 text-sm text-gray-500 mb-6">
                 <a href="{{ route('home') }}" class="hover:text-primary">{{ __('nav.home') }}</a>
                 <span>/</span>
@@ -15,7 +15,7 @@
                 <span class="text-gray-700">{{ Str::limit($news->title, 40) }}</span>
             </nav>
 
-            <!-- Category & Date -->
+
             <div class="flex items-center gap-4 mb-4">
                 <span class="text-sm font-semibold px-3 py-1 rounded text-white"
                       style="background-color: {{ $news->category->color }}">
@@ -25,12 +25,12 @@
                 <span class="text-gray-500">{{ $news->reading_time }} {{ __('news.min_read') }}</span>
             </div>
 
-            <!-- Title -->
+
             <h1 class="text-3xl md:text-4xl font-bold text-secondary mb-6">{{ $news->title }}</h1>
 
-            <!-- Author -->
+
             <div class="flex items-center gap-4 mb-8 pb-8 border-b">
-                <img src="{{ $news->author->avatar_url }}" alt="{{ $news->author->name }}" 
+                <img src="{{ $news->author->avatar_url }}" alt="{{ $news->author->name }}"
                      class="w-12 h-12 rounded-full object-cover">
                 <div>
                     <p class="font-semibold text-secondary">{{ $news->author->name }}</p>
@@ -38,30 +38,30 @@
                 </div>
             </div>
 
-            <!-- Featured Image or Video -->
+
             @if($news->video_url)
                 <div class="aspect-video rounded-xl overflow-hidden mb-8">
-                    <iframe src="{{ $news->video_embed_url }}" 
+                    <iframe src="{{ $news->video_embed_url }}"
                             class="w-full h-full"
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
                 </div>
             @else
-                <img src="{{ $news->image_url }}" alt="{{ $news->title }}" 
+                <img src="{{ $news->image_url }}" alt="{{ $news->title }}"
                      class="w-full h-96 object-cover rounded-xl mb-8">
             @endif
 
-            <!-- Content -->
+
             <div class="prose prose-lg max-w-none mb-8">
                 {!! nl2br(e($news->content)) !!}
             </div>
 
-            <!-- Interactions -->
+
             <div class="flex items-center justify-between py-6 border-t border-b mb-8">
                 <div class="flex items-center gap-6">
                     @auth
-                        <button onclick="likeNews({{ $news->id }})" 
+                        <button onclick="likeNews({{ $news->id }})"
                                 id="like-btn"
                                 class="flex items-center gap-2 {{ $isLiked ? 'text-red-500' : 'text-gray-500' }} hover:text-red-500 transition">
                             <svg class="w-6 h-6" fill="{{ $isLiked ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,21 +94,19 @@
                     </span>
                 </div>
 
-                <!-- Share -->
                 <div class="flex items-center gap-3">
                     <span class="text-gray-500">{{ __('news.share') }}:</span>
-                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($news->title) }}" 
+                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($news->title) }}"
                        target="_blank" class="text-gray-400 hover:text-blue-400">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
                     </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}" 
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}"
                        target="_blank" class="text-gray-400 hover:text-blue-600">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                     </a>
                 </div>
             </div>
 
-            <!-- Comments Section -->
             <section id="comments" class="mb-12">
                 <h2 class="text-2xl font-bold text-secondary mb-6">
                     {{ __('comments.title') }} ({{ $news->approvedComments->count() }})
@@ -134,12 +132,11 @@
                     </div>
                 @endauth
 
-                <!-- Comments List -->
                 <div class="space-y-6">
                     @foreach($news->approvedComments as $comment)
                         <div class="bg-gray-50 rounded-lg p-4">
                             <div class="flex items-start gap-3">
-                                <img src="{{ $comment->user->avatar_url }}" alt="{{ $comment->user->name }}" 
+                                <img src="{{ $comment->user->avatar_url }}" alt="{{ $comment->user->name }}"
                                      class="w-10 h-10 rounded-full object-cover">
                                 <div class="flex-1">
                                     <div class="flex items-center justify-between mb-2">
@@ -152,13 +149,12 @@
                                 </div>
                             </div>
 
-                            <!-- Replies -->
                             @if($comment->replies->count() > 0)
                                 <div class="ml-12 mt-4 space-y-4">
                                     @foreach($comment->replies as $reply)
                                         <div class="bg-white rounded-lg p-3">
                                             <div class="flex items-start gap-3">
-                                                <img src="{{ $reply->user->avatar_url }}" alt="{{ $reply->user->name }}" 
+                                                <img src="{{ $reply->user->avatar_url }}" alt="{{ $reply->user->name }}"
                                                      class="w-8 h-8 rounded-full object-cover">
                                                 <div>
                                                     <span class="font-semibold text-secondary">{{ $reply->user->name }}</span>
@@ -176,7 +172,6 @@
             </section>
         </div>
 
-        <!-- Related News -->
         @if($relatedNews->count() > 0)
             <section class="bg-gray-100 py-12">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

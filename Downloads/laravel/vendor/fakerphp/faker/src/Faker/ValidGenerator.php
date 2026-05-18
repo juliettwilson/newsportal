@@ -4,23 +4,12 @@ namespace Faker;
 
 use Faker\Extension\Extension;
 
-/**
- * Proxy for other generators, to return only valid values. Works with
- * Faker\Generator\Base->valid()
- *
- * @mixin Generator
- */
 class ValidGenerator
 {
     protected $generator;
     protected $validator;
     protected $maxRetries;
 
-    /**
-     * @param Extension|Generator $generator
-     * @param callable|null       $validator
-     * @param int                 $maxRetries
-     */
     public function __construct($generator, $validator = null, $maxRetries = 10000)
     {
         if (null === $validator) {
@@ -40,13 +29,6 @@ class ValidGenerator
         return new self($this->generator->ext($id), $this->validator, $this->maxRetries);
     }
 
-    /**
-     * Catch and proxy all generator calls but return only valid values
-     *
-     * @param string $attribute
-     *
-     * @deprecated Use a method instead.
-     */
     public function __get($attribute)
     {
         trigger_deprecation('fakerphp/faker', '1.14', 'Accessing property "%s" is deprecated, use "%s()" instead.', $attribute, $attribute);
@@ -54,12 +36,6 @@ class ValidGenerator
         return $this->__call($attribute, []);
     }
 
-    /**
-     * Catch and proxy all generator calls with arguments but return only valid values
-     *
-     * @param string $name
-     * @param array  $arguments
-     */
     public function __call($name, $arguments)
     {
         $i = 0;
