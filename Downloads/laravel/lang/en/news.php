@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'latest' => 'Latest News',
+    'popular' => 'Popular',
+    'featured' => 'Featured',
+    'related' => 'Related News',
+    'view_all' => 'View All',
+    'articles' => 'articles',
+    'views' => 'views',
+    'min_read' => 'min read',
+    'share' => 'Share',
+    'bookmark' => 'Bookmark',
+    'author' => 'Author',
+    'no_news' => 'No news found',
+    'breaking' => 'BREAKING',
+    'video' => 'Video News',
+    'all_news' => 'All News',
+    'browse_all' => 'Browse all news',
+    'filter' => 'Filter',
+    'sort_latest' => 'Latest first',
+    'sort_popular' => 'Most popular',
+    'sort_oldest' => 'Oldest first',
+    'all' => 'All',
+    'no_news_description' => 'No news available at the moment.',
+];
